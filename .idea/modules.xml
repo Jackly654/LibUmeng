@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LibsUmeng.iml" filepath="$PROJECT_DIR$/LibsUmeng.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LibUmeng.iml" filepath="$PROJECT_DIR$/LibUmeng.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/libumeng/libumeng.iml" filepath="$PROJECT_DIR$/libumeng/libumeng.iml" />
     </modules>

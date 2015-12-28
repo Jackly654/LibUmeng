@@ -17,6 +17,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.gov.cn.entity.Article;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.bean.SocializeEntity;
 import com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
@@ -24,7 +25,7 @@ import com.umeng.socialize.media.UMImage;
 
 
 import java.util.HashMap;
-
+//import com.gov.cn.AnalysisUtils;
 import share.gwy.gov.libumeng.UmengShare;
 
 import static com.umeng.socialize.bean.SHARE_MEDIA.EMAIL;
@@ -50,7 +51,7 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 	private final int Show_Hiding = 3;
 	private int state = Hide_None;
 	private ShareEntity shareEntity;
-	private AnalysisUtils analysisUtils;
+	//private AnalysisUtils analysisUtils;
 
 	public void setShareEntity(ShareEntity shareEntity) {
 		this.shareEntity = shareEntity;
@@ -114,7 +115,7 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 	}
 
 	private void findViews() {
-		shareContainer = View.inflate(context, R.layout.layout_share, null);
+		shareContainer = View.inflate(activity, R.layout.layout_share, null);
 		shareLayout = shareContainer.findViewById(R.id.shareLayout);
 		btWeibo = shareContainer.findViewById(R.id.btWeibo);
 		btWeichat = shareContainer.findViewById(R.id.btWeichat);
@@ -148,12 +149,12 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 	}
 
 	private void init() {
-		wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
 		wmParams = new WindowManager.LayoutParams();
 		wmParams.format = PixelFormat.RGBA_8888;
-		analysisUtils = new AnalysisUtils(context);
-		animPullUp = AnimationUtils.loadAnimation(context, R.anim.anim_pull_up);
-		animPullDown = AnimationUtils.loadAnimation(context,
+		//analysisUtils = new AnalysisUtils(context);
+		animPullUp = AnimationUtils.loadAnimation(activity, R.anim.anim_pull_up);
+		animPullDown = AnimationUtils.loadAnimation(activity,
 				R.anim.anim_pull_down);
 		umengShare = new UmengShare(activity);
 	}
@@ -252,64 +253,64 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 				String shareContent = createShareContent(article);
 				String imageUrl = createShareImage(article);
 				try {
-					analysisUtils.requestArticleAnalysis(article,
-							ArticleAnalysisType.SHARE);
-					analysisUtils.requestArticleAnalysis(SINA);
+//					analysisUtils.requestArticleAnalysis(article,
+//							AnalysisUtils.ArticleAnalysisType.SHARE);
+//					analysisUtils.requestArticleAnalysis(SINA);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				Dialog dialog = new WeiboShareDialog(UmengShare.getInstance(),
-						context, shareContent, imageUrl, this);
+				Dialog dialog = new WeiboShareDialog(umengShare,
+						activity, shareContent, imageUrl, this);
 				dialog.show();
 			}
 			break;
 		case R.id.btWeichat:
 			remove();
-			if(!AppUtils.isAppInstalled(context,"com.tencent.mm")){
-				Toast.makeText(context, "ƒ„µƒ ÷ª˙√ª”–∞≤◊∞Œ¢–≈", Toast.LENGTH_LONG).show();
+			if(!AppUtils.isAppInstalled(activity,"com.tencent.mm")){
+				Toast.makeText(activity, "‰Ω†Ê≤°ÊúâÂÆâË£ÖÂæÆ‰ø°", Toast.LENGTH_LONG).show();
 				return;
 			}
 			if (shareEntity != null && shareEntity.article != null) {
 				Article article = getShareEntity().getArticle();
-				UMImage umImage = new UMImage(context,
+				UMImage umImage = new UMImage(activity,
 						createShareImage(article));
-				analysisUtils.requestArticleAnalysis(article,
-						ArticleAnalysisType.SHARE);
-				analysisUtils.requestArticleAnalysis(WEIXIN);
+//				analysisUtils.requestArticleAnalysis(article,
+//						ArticleAnalysisType.SHARE);
+//				analysisUtils.requestArticleAnalysis(WEIXIN);
 				umengShare.shareWeiXin(activity, article.title, article.zhaiYao,
 						article.shareUrl, umImage, this);
 			}
 			break;
 		case R.id.btWeichatMoment:
 			remove();
-			if(!AppUtils.isAppInstalled(context,"com.tencent.mm")){
-				Toast.makeText(context, "You haven't installed WeChat on your phone.", 1).show();
+			if(!AppUtils.isAppInstalled(activity,"com.tencent.mm")){
+				Toast.makeText(activity, "You haven't installed WeChat on your phone.", Toast.LENGTH_LONG).show();
 				return;
 			}
 			if (shareEntity != null && shareEntity.article != null) {
 				Article article = getShareEntity().getArticle();
-				UMImage umImage = new UMImage(context,
+				UMImage umImage = new UMImage(activity,
 						createShareImage(article));
-				analysisUtils.requestArticleAnalysis(article,
-						ArticleAnalysisType.SHARE);
-				analysisUtils.requestArticleAnalysis(WEIXIN_CIRCLE);
-				UmengShare.getInstance().shareWeiXinFriend(context,
-						article.title+"fengexian"+article.zhaiYao, article.shareUrl, umImage, this);
+//				analysisUtils.requestArticleAnalysis(article,
+//						ArticleAnalysisType.SHARE);
+//				analysisUtils.requestArticleAnalysis(WEIXIN_CIRCLE);
+				umengShare.shareWeiXinFriend(activity,
+						article.title + "fengexian" + article.zhaiYao, article.shareUrl, umImage, this);
 			}
 			break;
 		case R.id.btQicq:
 			remove();
 			if (shareEntity != null && shareEntity.article != null) {
 				Article article = getShareEntity().getArticle();
-				UMImage umImage = new UMImage(context,
+				UMImage umImage = new UMImage(activity,
 						createShareImage(article));
 
-				String content=SMS_SUB + article.title + SMS_APP_DOWNLOAD;
-				analysisUtils.requestArticleAnalysis(article,
-						ArticleAnalysisType.SHARE);
-				analysisUtils.requestArticleAnalysis(EMAIL);
-				UmengShare.getInstance().shareEmail(context, article.title,
-						content, new String[] {}, null, umImage, this);
+//				String content=SMS_SUB + article.title + SMS_APP_DOWNLOAD;
+////				analysisUtils.requestArticleAnalysis(article,
+////						ArticleAnalysisType.SHARE);
+////				analysisUtils.requestArticleAnalysis(EMAIL);
+//				UmengShare.getInstance().shareEmail(context, article.title,
+//						content, new String[] {}, null, umImage, this);
 			}
 
 			break;
@@ -320,11 +321,15 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 			break;
 		}
 	}
+/**
+ * Ëé∑ÂèñÂõæÁâáÂú∞ÂùÄ
+ */
 
 	private String createShareImage(Article article) {
-		String imageUrl = Urls.image(article.path, article.articleId,
-				article.firstPictureFileHD());
-		return imageUrl;
+//		String imageUrl = Urls.image(article.path, article.articleId,
+//				article.firstPictureFileHD());
+//		return imageUrl;
+		return "http://www.umeng.com/images/pic/social/integrated_3.png";
 	}
 
 	private String createShareContent(Article article) {
@@ -345,58 +350,34 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 		System.out.println(share_media);
 		System.out.println(arg1);
 		System.out.println(arg2);
-		if (arg1 == HttpStatus.SC_OK) {
-			// TODO ∑÷œÌ≥…π¶
-			// Toast.makeText(context, "∑÷œÌ≥…π¶", Toast.LENGTH_SHORT).show();
+		//if (arg1 == HttpStatus.SC_OK) {
+			// TODO ÔøΩÔøΩÔøΩÔøΩ…πÔøΩ
+			// Toast.makeText(context, "ÔøΩÔøΩÔøΩÔøΩ…πÔøΩ", Toast.LENGTH_SHORT).show();
 			switch(share_media){
 			case SINA:
-				Toast.makeText(context, "Shared to Weibo!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity, "Shared to Weibo!", Toast.LENGTH_SHORT).show();
 				break;
 			case WEIXIN:
-				Toast.makeText(context, "Shared to WeChat!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity, "Shared to WeChat!", Toast.LENGTH_SHORT).show();
 				break;
 			case WEIXIN_CIRCLE:
-				Toast.makeText(context, "Shared to WeChat Moments!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity, "Shared to WeChat Moments!", Toast.LENGTH_SHORT).show();
 				break;
 			case EMAIL:
 			case SMS:
-				Toast.makeText(context, "Successfully sent!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(activity, "Successfully sent!", Toast.LENGTH_SHORT).show();
 				break;
 			default:
 				break;
 			}
 		}
 
-	}
+	//}
 
 	@Override
 	public void onStart() {
 		System.out.println("ShareUtils.onStart()");
 	}
 
-	@Override
-	public void onCancel(Platform arg0, int arg1) {
-		// TODO Auto-generated method stub
-		System.out.println(arg0);
-		System.out.println(arg1);
-//		Toast.makeText(context, "cancel", Toast.LENGTH_SHORT).show();
-	}
 
-	@Override
-	public void onComplete(Platform arg0, int arg1, HashMap<String, Object> arg2) {
-		// TODO Auto-generated method stub
-		System.out.println(arg0);
-		System.out.println(arg1);
-		System.out.println(arg2);
-//		Toast.makeText(context, "complete", Toast.LENGTH_SHORT).show();
-	}
-
-	@Override
-	public void onError(Platform arg0, int arg1, Throwable arg2) {
-		// TODO Auto-generated method stub
-		System.out.println(arg0);
-		System.out.println(arg1);
-		arg2.printStackTrace();
-//		Toast.makeText(context, "error", Toast.LENGTH_SHORT).show();
-	}
 }

@@ -1,5 +1,6 @@
 package com.gov.cn;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap.Config;
@@ -11,6 +12,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
 import com.umeng.socialize.media.UMImage;
 
@@ -24,21 +28,25 @@ public class WeiboShareDialog extends Dialog implements
 	private EditText tvContent;
 
 	private SnsPostListener postListener;
-	private static final String AT = "@ÖÐ¹ú¹úÎñÔº";
+	private static final String AT = "@ï¿½Ð¹ï¿½ï¿½ï¿½ï¿½Ôº";
 	private UMImage umImage;
+	private UmengShare umengShare;
+	private Activity activity;
 
-	public WeiboShareDialog(UmengShare umengShare, Context context,
+	public WeiboShareDialog(UmengShare umengShare, Activity activity,
 							String content, String imageUri, SnsPostListener postListener) {
-		super(context);
+		super(activity);
 		this.content = content;
 		this.imageUri = imageUri;
 		this.postListener = postListener;
 		this.umImage = new UMImage(getContext(), imageUri);
+		this.umengShare = umengShare;
+		this.activity = activity;
 	}
 
-	public WeiboShareDialog(UmengShare umengShare, Context context,
+	public WeiboShareDialog(UmengShare umengShare, Activity activity,
 							String content, UMImage umImage, SnsPostListener postListener) {
-		this(umengShare, context, content, "", postListener);
+		this(umengShare, activity, content, "", postListener);
 		this.umImage = umImage;
 	}
 
@@ -64,8 +72,8 @@ public class WeiboShareDialog extends Dialog implements
 		DisplayImageOptions imageOptions = new DisplayImageOptions.Builder()
 		.cacheInMemory(false).cacheOnDisc(true)
 		.resetViewBeforeLoading(true)
-		.showImageForEmptyUri(R.drawable.chinadaily_launcher_back)
-		.showImageOnFail(R.drawable.chinadaily_launcher_back)
+		.showImageForEmptyUri(R.drawable.icon)
+		.showImageOnFail(R.drawable.icon)
 		.bitmapConfig(Config.RGB_565)
 		.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2).build();
 		ImageLoader.getInstance().displayImage(imageUri, ivImage, imageOptions);
@@ -79,7 +87,7 @@ public class WeiboShareDialog extends Dialog implements
 			cancel();
 			break;
 		case R.id.btSend:
-			UmengShare.shareWeibo_new(getContext(), content, null,
+			umengShare.shareWeibo(activity, content, null,
 					umImage, postListener);
 			this.dismiss();
 			break;

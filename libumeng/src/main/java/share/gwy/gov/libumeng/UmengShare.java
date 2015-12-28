@@ -166,6 +166,7 @@ public class UmengShare implements UmengShareFactory{
          */
         UMWXHandler wxHandler = new UMWXHandler(activity, UmengCons.WEIXIN_APPID, UmengCons.WEIXIN_SECRET);
         wxHandler.addToSocialSDK();
+        wxHandler.showCompressToast(false);
 
         WeiXinShareContent weixinContent = new WeiXinShareContent();
         weixinContent
@@ -178,6 +179,8 @@ public class UmengShare implements UmengShareFactory{
         weixinContent.setTargetUrl(uri);
         weixinContent.setShareMedia(umImage);
         mController.setShareMedia(weixinContent);
+        mController.directShare(activity, SHARE_MEDIA.WEIXIN,
+                postListener);
     }
 
     @Override
