@@ -165,7 +165,7 @@ public class UmengShare implements UmengShareFactory{
         sinaContent.setShareContent(content);
         sinaContent.setShareImage(umImage);
         mController.setShareMedia(sinaContent);
-        mController.directShare(context, SHARE_MEDIA.QQ,
+        mController.directShare(context, SHARE_MEDIA.SINA,
                 postListener);
 
     }

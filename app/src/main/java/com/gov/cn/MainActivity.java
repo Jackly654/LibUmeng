@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.gov.cn.entity.Article;
+import com.umeng.message.PushAgent;
 import com.umeng.socialize.sso.UMSsoHandler;
 
 import com.gov.cn.ShareUtils.ShareEntity;
@@ -43,15 +44,25 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        
-        init();
+
+
+
+        initShare();
+        initPush();
 
     }
 
+    private void initPush() {
+        //开启推送服务
+        PushAgent mPushAgent = PushAgent.getInstance(context);
+        mPushAgent.enable();
+        //统计应用启动数据
+        PushAgent.getInstance(this).onAppStart();
+    }
 
 
-    private void init() {
-        //umengShare = new UmengShare(this);
+    private void initShare() {
+        umengShare = new UmengShare();
         open_share = (Button) findViewById(R.id.open_share);
         context = MainActivity.this;
         shareUtil = new ShareUtils(context);
@@ -61,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
                // umengShare.openShare("友盟社会化分享组件-朋友圈","来自友盟社会化组件（SDK）让移动应用快速整合社交分享功能-朋友圈。http://www.umeng.com/social","http://www.umeng.com/social","http://www.umeng.com/images/pic/social/integrated_3.png",null);
                 ShareEntity shareEntity = new ShareEntity();
-                //假数据
+                // TODO 假数据
                 article = new Article();
                 article.title = "友盟社会化分享组件-朋友圈";
                 article.summary = "来自友盟社会化组件（SDK）让移动应用快速整合社交分享功能-朋友圈。";
@@ -103,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+//TODO 分享SSO
         UMSsoHandler ssoHandler = umengShare.getController().getConfig().getSsoHandler(
                 requestCode);
         if (ssoHandler != null) {
