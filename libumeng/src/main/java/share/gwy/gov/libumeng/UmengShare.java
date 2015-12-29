@@ -1,6 +1,7 @@
 package share.gwy.gov.libumeng;
 
 import android.app.Activity;
+import android.content.Context;
 
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.controller.UMServiceFactory;
@@ -27,9 +28,16 @@ public class UmengShare implements UmengShareFactory{
             .getUMSocialService(UmengCons.SHARE_URL);
     private Activity activity;
 
-    private UmengShare() {
+    /**
+     * 自定义面板
+     */
+    public UmengShare() {
     }
 
+    /**
+     * 默认面板需要的参数
+     * @param activity
+     */
     public UmengShare(Activity activity) {
         this.activity = activity;
         configPlatforms();
@@ -150,23 +158,45 @@ public class UmengShare implements UmengShareFactory{
 
 
     @Override
-    public void shareWeibo(Activity activity, String content, String uri, UMImage umImage, SocializeListeners.SnsPostListener postListener) {
+    public void shareWeibo(Context context, String content, String uri, UMImage umImage, SocializeListeners.SnsPostListener postListener) {
+        // 添加新浪SSO授权
+        mController.getConfig().setSsoHandler(new SinaSsoHandler());
+        SinaShareContent sinaContent = new SinaShareContent();
+        sinaContent.setShareContent(content);
+        sinaContent.setShareImage(umImage);
+        mController.setShareMedia(sinaContent);
+        mController.directShare(context, SHARE_MEDIA.QQ,
+                postListener);
 
     }
 
     @Override
-    public void shareQicq(Activity activity, String content, String uri, UMImage umImage, SocializeListeners.SnsPostListener postListener) {
+    public void shareQicq(Context context, String title,String content, String uri, UMImage umImage, SocializeListeners.SnsPostListener postListener) {
+
+        UMQQSsoHandler qqHandler = new UMQQSsoHandler((Activity)context, UmengCons.QZONE_APPID, UmengCons.QZONE_APPKEY);
+        qqHandler.addToSocialSDK();
+        mController.getConfig().closeToast();
+
+        QQShareContent qqShareContent = new QQShareContent();
+        qqShareContent.setShareContent(content);
+        qqShareContent.setTitle(title);
+        qqShareContent.setShareMedia(umImage);
+        qqShareContent.setTargetUrl(uri);
+        mController.setShareMedia(qqShareContent);
+        mController.directShare(context, SHARE_MEDIA.QQ,
+                postListener);
 
     }
 
     @Override
-    public void shareWeiXin(Activity activity, String title,String content, String uri, UMImage umImage, SocializeListeners.SnsPostListener postListener) {
+    public void shareWeiXin(Context context, String title,String content, String uri, UMImage umImage, SocializeListeners.SnsPostListener postListener) {
         /**
          * 初始化SDK，添加一些平台
          */
-        UMWXHandler wxHandler = new UMWXHandler(activity, UmengCons.WEIXIN_APPID, UmengCons.WEIXIN_SECRET);
+       UMWXHandler wxHandler = new UMWXHandler(context, UmengCons.WEIXIN_APPID, UmengCons.WEIXIN_SECRET);
         wxHandler.addToSocialSDK();
         wxHandler.showCompressToast(false);
+
 
         WeiXinShareContent weixinContent = new WeiXinShareContent();
         weixinContent
@@ -179,12 +209,33 @@ public class UmengShare implements UmengShareFactory{
         weixinContent.setTargetUrl(uri);
         weixinContent.setShareMedia(umImage);
         mController.setShareMedia(weixinContent);
-        mController.directShare(activity, SHARE_MEDIA.WEIXIN,
+        mController.getConfig().closeToast();
+        mController.directShare(context, SHARE_MEDIA.WEIXIN,
                 postListener);
     }
 
     @Override
-    public void shareWeiXinFriend(Activity activity, String content, String uri, UMImage umImage, SocializeListeners.SnsPostListener postListener) {
+    public void shareWeiXinFriend(Context context, String title,String content,String uri, UMImage umImage, SocializeListeners.SnsPostListener postListener) {
 
+        // 支持微信朋友圈
+        UMWXHandler wxCircleHandler = new UMWXHandler(context, UmengCons.WEIXIN_APPID, UmengCons.WEIXIN_SECRET);
+        wxCircleHandler.setToCircle(true);
+        wxCircleHandler.addToSocialSDK();
+
+        CircleShareContent circleMedia = new CircleShareContent();
+        circleMedia
+                .setShareContent(content);
+        if(title!=null) {
+            circleMedia.setTitle(title);
+        }else{
+            circleMedia.setTitle("朋友圈");
+        }
+        circleMedia.setShareMedia(umImage);
+        // circleMedia.setShareMedia(uMusic);
+        // circleMedia.setShareMedia(video);
+        circleMedia.setTargetUrl(uri);
+        mController.setShareMedia(circleMedia);
+        mController.directShare(context, SHARE_MEDIA.WEIXIN_CIRCLE,
+                postListener);
     }
 }

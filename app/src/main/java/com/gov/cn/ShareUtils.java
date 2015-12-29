@@ -115,7 +115,7 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 	}
 
 	private void findViews() {
-		shareContainer = View.inflate(activity, R.layout.layout_share, null);
+		shareContainer = View.inflate(context, R.layout.layout_share, null);
 		shareLayout = shareContainer.findViewById(R.id.shareLayout);
 		btWeibo = shareContainer.findViewById(R.id.btWeibo);
 		btWeichat = shareContainer.findViewById(R.id.btWeichat);
@@ -149,14 +149,14 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 	}
 
 	private void init() {
-		wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
+		wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 		wmParams = new WindowManager.LayoutParams();
 		wmParams.format = PixelFormat.RGBA_8888;
 		//analysisUtils = new AnalysisUtils(context);
-		animPullUp = AnimationUtils.loadAnimation(activity, R.anim.anim_pull_up);
-		animPullDown = AnimationUtils.loadAnimation(activity,
+		animPullUp = AnimationUtils.loadAnimation(context, R.anim.anim_pull_up);
+		animPullDown = AnimationUtils.loadAnimation(context,
 				R.anim.anim_pull_down);
-		umengShare = new UmengShare(activity);
+		umengShare = new UmengShare();
 	}
 
 	/**
@@ -260,57 +260,55 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 					e.printStackTrace();
 				}
 				Dialog dialog = new WeiboShareDialog(umengShare,
-						activity, shareContent, imageUrl, this);
+						context, shareContent, imageUrl, this);
 				dialog.show();
 			}
 			break;
 		case R.id.btWeichat:
 			remove();
-			if(!AppUtils.isAppInstalled(activity,"com.tencent.mm")){
-				Toast.makeText(activity, "你没有安装微信", Toast.LENGTH_LONG).show();
+			if(!AppUtils.isAppInstalled(context,"com.tencent.mm")){
+				Toast.makeText(context, "你的手机没有安装微信", Toast.LENGTH_LONG).show();
 				return;
 			}
 			if (shareEntity != null && shareEntity.article != null) {
 				Article article = getShareEntity().getArticle();
-				UMImage umImage = new UMImage(activity,
+				UMImage umImage = new UMImage(context,
 						createShareImage(article));
 //				analysisUtils.requestArticleAnalysis(article,
 //						ArticleAnalysisType.SHARE);
 //				analysisUtils.requestArticleAnalysis(WEIXIN);
-				umengShare.shareWeiXin(activity, article.title, article.zhaiYao,
+				umengShare.shareWeiXin(context, article.title, article.summary,
 						article.shareUrl, umImage, this);
 			}
 			break;
 		case R.id.btWeichatMoment:
 			remove();
-			if(!AppUtils.isAppInstalled(activity,"com.tencent.mm")){
-				Toast.makeText(activity, "You haven't installed WeChat on your phone.", Toast.LENGTH_LONG).show();
+			if(!AppUtils.isAppInstalled(context,"com.tencent.mm")){
+				Toast.makeText(context, "你的手机没有安装微信", Toast.LENGTH_LONG).show();
 				return;
 			}
 			if (shareEntity != null && shareEntity.article != null) {
 				Article article = getShareEntity().getArticle();
-				UMImage umImage = new UMImage(activity,
+				UMImage umImage = new UMImage(context,
 						createShareImage(article));
 //				analysisUtils.requestArticleAnalysis(article,
 //						ArticleAnalysisType.SHARE);
 //				analysisUtils.requestArticleAnalysis(WEIXIN_CIRCLE);
-				umengShare.shareWeiXinFriend(activity,
-						article.title + "fengexian" + article.zhaiYao, article.shareUrl, umImage, this);
+				umengShare.shareWeiXinFriend(context,
+						article.title , article.summary, article.shareUrl, umImage, this);
 			}
 			break;
 		case R.id.btQicq:
 			remove();
 			if (shareEntity != null && shareEntity.article != null) {
 				Article article = getShareEntity().getArticle();
-				UMImage umImage = new UMImage(activity,
+				UMImage umImage = new UMImage(context,
 						createShareImage(article));
 
-//				String content=SMS_SUB + article.title + SMS_APP_DOWNLOAD;
 ////				analysisUtils.requestArticleAnalysis(article,
 ////						ArticleAnalysisType.SHARE);
 ////				analysisUtils.requestArticleAnalysis(EMAIL);
-//				UmengShare.getInstance().shareEmail(context, article.title,
-//						content, new String[] {}, null, umImage, this);
+				umengShare.shareQicq(context,article.title,article.summary,article.shareUrl,umImage,this);
 			}
 
 			break;
@@ -322,7 +320,7 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 		}
 	}
 /**
- * 获取图片地址
+ * 图片路径
  */
 
 	private String createShareImage(Article article) {
@@ -350,29 +348,28 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 		System.out.println(share_media);
 		System.out.println(arg1);
 		System.out.println(arg2);
-		//if (arg1 == HttpStatus.SC_OK) {
-			// TODO ����ɹ�
-			// Toast.makeText(context, "����ɹ�", Toast.LENGTH_SHORT).show();
+		if (arg1 == 200) {
+			// TODO 分享成功
+
 			switch(share_media){
 			case SINA:
-				Toast.makeText(activity, "Shared to Weibo!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "成功分享到微博", Toast.LENGTH_SHORT).show();
 				break;
 			case WEIXIN:
-				Toast.makeText(activity, "Shared to WeChat!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "成功分享到微信", Toast.LENGTH_SHORT).show();
 				break;
 			case WEIXIN_CIRCLE:
-				Toast.makeText(activity, "Shared to WeChat Moments!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, "成功分享到朋友圈", Toast.LENGTH_SHORT).show();
 				break;
-			case EMAIL:
-			case SMS:
-				Toast.makeText(activity, "Successfully sent!", Toast.LENGTH_SHORT).show();
+			case QQ:
+				Toast.makeText(context, "成功分享到QQ", Toast.LENGTH_SHORT).show();
 				break;
 			default:
 				break;
 			}
 		}
 
-	//}
+	}
 
 	@Override
 	public void onStart() {

@@ -1,5 +1,6 @@
 package com.gov.cn;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private UmengShare umengShare;
     private Article article;
     private ShareUtils shareUtil;
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,30 +48,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void initViewListener() {
-    }
+
 
     private void init() {
-        umengShare = new UmengShare(this);
+        //umengShare = new UmengShare(this);
         open_share = (Button) findViewById(R.id.open_share);
-        shareUtil = new ShareUtils(MainActivity.this);
+        context = MainActivity.this;
+        shareUtil = new ShareUtils(context);
         open_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                // umengShare.openShare("友盟社会化分享组件-朋友圈","来自友盟社会化组件（SDK）让移动应用快速整合社交分享功能-朋友圈。http://www.umeng.com/social","http://www.umeng.com/social","http://www.umeng.com/images/pic/social/integrated_3.png",null);
                 ShareEntity shareEntity = new ShareEntity();
+                //假数据
                 article = new Article();
                 article.title = "友盟社会化分享组件-朋友圈";
-                article.zhaiYao = "来自友盟社会化组件（SDK）让移动应用快速整合社交分享功能-朋友圈。";
+                article.summary = "来自友盟社会化组件（SDK）让移动应用快速整合社交分享功能-朋友圈。";
                 article.shareUrl = "http://www.umeng.com/social";
-                shareEntity.setTitle("友盟社会化分享组件-朋友圈");
-                shareEntity
-                        .setContent("<p>I thought you might be interested in this article "
-                                + article.title
-                                + "</p><p>DOWNLOAD CHINADAILY</p><img src='"
 
-                                + "' />");
                 shareEntity.setArticle(article);
 
 

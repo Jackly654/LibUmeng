@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:drawable="@color/green" android:state_pressed="true"></item>
-    <item android:drawable="@color/white"></item>
-
-</selector><!-- From: file:/C:/Users/Administrator/Desktop/LibsUmeng/umengPush/src/main/res/drawable-hdpi/list_item_color_bg.xml --><!-- From: file:/C:/Users/Administrator/Desktop/LibsUmeng/umengPush/build/intermediates/bundles/debug/res/drawable-hdpi/list_item_color_bg.xml -->

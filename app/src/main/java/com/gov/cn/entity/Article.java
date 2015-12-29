@@ -28,7 +28,7 @@ public class Article implements Serializable{
 	public int languageMode;
 	public Map<String,Picture> pictures;
 	private List<Picture> pictureList;
-	public String zhaiYao;
+	public String summary;
 
 
 

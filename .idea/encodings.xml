@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/app/src/libs/universal-image-loader-1.9.3.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/gov/cn/AppUtils.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/gov/cn/ImageUtils.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/gov/cn/MainActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/gov/cn/ShareUtils.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/gov/cn/WeiboShareDialog.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/anim/anim_pull_down.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/anim/anim_pull_up.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/icon_qq.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/icon_wechat.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/icon_wechat_moment.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/icon_weibo.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/layout_share.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_AtFriends.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_QQZone_1.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_QQZone_2.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_QQZone_3.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_Sina.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_UserCenter.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_WeiXin_1.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_WeiXin_2.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_actionbarview.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_comment.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_email.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_evernote.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_facebook_1.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_facebook_2.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_flickr.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_foursquare.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_instagram.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_kakao.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_laiwang_1.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_laiwang_2.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_like.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_line.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_linkedin.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_pinterest.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_pocket.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_renren_1.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_renren_2.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_scrshot.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_shake.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_sms.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_tencentWB_1.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_tencentWB_2.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_tencentWB_3.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_tumblr.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_whatsapp.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_yixin_1.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_yixin_2.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_ynote.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/bolts-android-1.1.4.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/httpmime-4.1.3.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/libs/umeng_social_sdk.jar" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/libumeng/src/main/java/com/gov/cn/wxapi/WXEntryActivity.java" charset="GBK" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

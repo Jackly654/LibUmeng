@@ -1,1 +1,1 @@
-include ':app', ':libumeng'
+include ':app', ':libumeng', ':libumengpsh'

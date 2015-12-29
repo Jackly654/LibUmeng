@@ -28,25 +28,26 @@ public class WeiboShareDialog extends Dialog implements
 	private EditText tvContent;
 
 	private SnsPostListener postListener;
-	private static final String AT = "@�й����Ժ";
+	private static final String AT = "@中央国务院";
 	private UMImage umImage;
 	private UmengShare umengShare;
-	private Activity activity;
+	private Context context;
 
-	public WeiboShareDialog(UmengShare umengShare, Activity activity,
+	public WeiboShareDialog(UmengShare umengShare, Context context,
 							String content, String imageUri, SnsPostListener postListener) {
-		super(activity);
+		super(context);
+		this.context = context;
 		this.content = content;
 		this.imageUri = imageUri;
 		this.postListener = postListener;
 		this.umImage = new UMImage(getContext(), imageUri);
 		this.umengShare = umengShare;
-		this.activity = activity;
+
 	}
 
-	public WeiboShareDialog(UmengShare umengShare, Activity activity,
+	public WeiboShareDialog(UmengShare umengShare,Context context,
 							String content, UMImage umImage, SnsPostListener postListener) {
-		this(umengShare, activity, content, "", postListener);
+		this(umengShare, context, content, "", postListener);
 		this.umImage = umImage;
 	}
 
@@ -87,7 +88,7 @@ public class WeiboShareDialog extends Dialog implements
 			cancel();
 			break;
 		case R.id.btSend:
-			umengShare.shareWeibo(activity, content, null,
+			umengShare.shareWeibo(context,content, imageUri,
 					umImage, postListener);
 			this.dismiss();
 			break;
