@@ -221,6 +221,7 @@ public class UmengShare implements UmengShareFactory{
         UMWXHandler wxCircleHandler = new UMWXHandler(context, UmengCons.WEIXIN_APPID, UmengCons.WEIXIN_SECRET);
         wxCircleHandler.setToCircle(true);
         wxCircleHandler.addToSocialSDK();
+        wxCircleHandler.showCompressToast(false);
 
         CircleShareContent circleMedia = new CircleShareContent();
         circleMedia
@@ -235,6 +236,7 @@ public class UmengShare implements UmengShareFactory{
         // circleMedia.setShareMedia(video);
         circleMedia.setTargetUrl(uri);
         mController.setShareMedia(circleMedia);
+        mController.getConfig().closeToast();
         mController.directShare(context, SHARE_MEDIA.WEIXIN_CIRCLE,
                 postListener);
     }
