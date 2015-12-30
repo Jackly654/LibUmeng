@@ -1,4 +1,4 @@
-package com.gov.cn;
+package com.gov.cn.utils;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 

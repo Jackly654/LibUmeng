@@ -1,4 +1,4 @@
-package com.gov.cn;
+package com.gov.cn.widget;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.gov.cn.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;

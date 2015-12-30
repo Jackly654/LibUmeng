@@ -1,22 +1,17 @@
 package com.gov.cn.application;
 
-import android.app.ActivityManager;
 import android.app.Application;
 import android.app.Notification;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.RemoteViews;
-import android.widget.Toast;
 
-import com.gov.cn.ArticleDetailActivity;
-import com.gov.cn.ImageUtils;
+import com.gov.cn.ui.ArticleDetailActivity;
+import com.gov.cn.utils.ImageUtils;
 import com.gov.cn.R;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -29,7 +24,6 @@ import com.umeng.message.UmengNotificationClickHandler;
 import com.umeng.message.entity.UMessage;
 
 import java.io.File;
-import java.util.List;
 
 /**
  * Created by Administrator on 2015/12/28.

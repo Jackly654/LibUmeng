@@ -2,17 +2,19 @@
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/app/libs/universal-image-loader-1.9.3.jar" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/gov/cn/AppUtils.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/gov/cn/ImageUtils.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/gov/cn/MainActivity.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/gov/cn/ShareUtils.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/gov/cn/WeiboShareDialog.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/assets/demo.html" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/gov/cn/ui/MainActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/gov/cn/utils/AppUtils.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/gov/cn/utils/ImageUtils.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/gov/cn/utils/ShareUtils.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/gov/cn/widget/WeiboShareDialog.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/anim/anim_pull_down.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/anim/anim_pull_up.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/icon_qq.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/icon_wechat.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/icon_wechat_moment.png" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/icon_weibo.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_umeng_analytics_webview.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/layout_share.xml" charset="GBK" />
     <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_AtFriends.jar" charset="GBK" />
     <file url="file://$PROJECT_DIR$/libumeng/libs/SocialSDK_QQZone_1.jar" charset="GBK" />

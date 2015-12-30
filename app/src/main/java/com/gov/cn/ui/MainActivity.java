@@ -1,4 +1,4 @@
-package com.gov.cn;
+package com.gov.cn.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,18 +13,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.gov.cn.R;
 import com.gov.cn.entity.Article;
+import com.gov.cn.utils.ShareUtils;
 import com.umeng.message.PushAgent;
 import com.umeng.socialize.sso.UMSsoHandler;
 
-import com.gov.cn.ShareUtils.ShareEntity;
-
-import javax.crypto.Mac;
+import com.gov.cn.utils.ShareUtils.ShareEntity;
 
 import share.gwy.gov.libumeng.UmengShare;
 
 public class MainActivity extends AppCompatActivity {
-    private Button open_share;
+    private Button open_share,analytics;
     private UmengShare umengShare;
     private Article article;
     private ShareUtils shareUtil;
@@ -62,8 +62,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initShare() {
+        //友盟分享
         umengShare = new UmengShare();
+
         open_share = (Button) findViewById(R.id.open_share);
+        analytics = (Button) findViewById(R.id.analytics);
+
         context = MainActivity.this;
         shareUtil = new ShareUtils(context);
         open_share.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +91,17 @@ public class MainActivity extends AppCompatActivity {
                 shareUtil.show(article);
             }
         });
+
+        analytics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this,ArticleDetailActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override

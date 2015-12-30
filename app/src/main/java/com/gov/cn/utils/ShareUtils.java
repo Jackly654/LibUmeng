@@ -1,12 +1,12 @@
-package com.gov.cn;
+package com.gov.cn.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,22 +17,22 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.gov.cn.R;
 import com.gov.cn.entity.Article;
+import com.gov.cn.utils.AnalysisUtils;
+import com.gov.cn.utils.AppUtils;
+import com.gov.cn.widget.WeiboShareDialog;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.bean.SocializeEntity;
 import com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
 import com.umeng.socialize.media.UMImage;
 
 
-import java.util.HashMap;
-//import com.gov.cn.AnalysisUtils;
+import com.gov.cn.utils.AnalysisUtils.*;
 import share.gwy.gov.libumeng.UmengShare;
 
 import static com.umeng.socialize.bean.SHARE_MEDIA.EMAIL;
-import static com.umeng.socialize.bean.SHARE_MEDIA.FACEBOOK;
 import static com.umeng.socialize.bean.SHARE_MEDIA.SINA;
-import static com.umeng.socialize.bean.SHARE_MEDIA.SMS;
-import static com.umeng.socialize.bean.SHARE_MEDIA.TWITTER;
 import static com.umeng.socialize.bean.SHARE_MEDIA.WEIXIN;
 import static com.umeng.socialize.bean.SHARE_MEDIA.WEIXIN_CIRCLE;
 
@@ -51,7 +51,8 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 	private final int Show_Hiding = 3;
 	private int state = Hide_None;
 	private ShareEntity shareEntity;
-	//private AnalysisUtils analysisUtils;
+	//TODO 分享统计事件例子
+	private AnalysisUtils analysisUtils;
 
 	public void setShareEntity(ShareEntity shareEntity) {
 		this.shareEntity = shareEntity;
@@ -152,7 +153,7 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 		wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 		wmParams = new WindowManager.LayoutParams();
 		wmParams.format = PixelFormat.RGBA_8888;
-		//analysisUtils = new AnalysisUtils(context);
+		analysisUtils = new AnalysisUtils(context);
 		animPullUp = AnimationUtils.loadAnimation(context, R.anim.anim_pull_up);
 		animPullDown = AnimationUtils.loadAnimation(context,
 				R.anim.anim_pull_down);
@@ -253,9 +254,9 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 				String shareContent = createShareContent(article);
 				String imageUrl = createShareImage(article);
 				try {
-//					analysisUtils.requestArticleAnalysis(article,
-//							AnalysisUtils.ArticleAnalysisType.SHARE);
-//					analysisUtils.requestArticleAnalysis(SINA);
+					analysisUtils.requestArticleAnalysis(article,
+							ArticleAnalysisType.SHARE);
+					analysisUtils.requestArticleAnalysis(SINA);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -266,7 +267,7 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 			break;
 		case R.id.btWeichat:
 			remove();
-			if(!AppUtils.isAppInstalled(context,"com.tencent.mm")){
+			if(!AppUtils.isAppInstalled(context, "com.tencent.mm")){
 				Toast.makeText(context, "你的手机没有安装微信", Toast.LENGTH_LONG).show();
 				return;
 			}
@@ -274,9 +275,9 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 				Article article = getShareEntity().getArticle();
 				UMImage umImage = new UMImage(context,
 						createShareImage(article));
-//				analysisUtils.requestArticleAnalysis(article,
-//						ArticleAnalysisType.SHARE);
-//				analysisUtils.requestArticleAnalysis(WEIXIN);
+				analysisUtils.requestArticleAnalysis(article,
+						ArticleAnalysisType.SHARE);
+				analysisUtils.requestArticleAnalysis(WEIXIN);
 				umengShare.shareWeiXin(context, article.title, article.summary,
 						article.shareUrl, umImage, this);
 			}
@@ -291,9 +292,9 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 				Article article = getShareEntity().getArticle();
 				UMImage umImage = new UMImage(context,
 						createShareImage(article));
-//				analysisUtils.requestArticleAnalysis(article,
-//						ArticleAnalysisType.SHARE);
-//				analysisUtils.requestArticleAnalysis(WEIXIN_CIRCLE);
+				analysisUtils.requestArticleAnalysis(article,
+						ArticleAnalysisType.SHARE);
+				analysisUtils.requestArticleAnalysis(WEIXIN_CIRCLE);
 				umengShare.shareWeiXinFriend(context,
 						article.title , article.summary, article.shareUrl, umImage, this);
 			}
@@ -305,9 +306,9 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 				UMImage umImage = new UMImage(context,
 						createShareImage(article));
 
-////				analysisUtils.requestArticleAnalysis(article,
-////						ArticleAnalysisType.SHARE);
-////				analysisUtils.requestArticleAnalysis(EMAIL);
+				analysisUtils.requestArticleAnalysis(article,
+						ArticleAnalysisType.SHARE);
+				analysisUtils.requestArticleAnalysis(EMAIL);
 				umengShare.shareQicq(context,article.title,article.summary,article.shareUrl,umImage,this);
 			}
 
@@ -322,7 +323,7 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 /**
  * 图片路径
  */
-
+//TODO 处理图片路径
 	private String createShareImage(Article article) {
 //		String imageUrl = Urls.image(article.path, article.articleId,
 //				article.firstPictureFileHD());
@@ -373,7 +374,7 @@ public class ShareUtils implements OnClickListener, SnsPostListener{
 
 	@Override
 	public void onStart() {
-		System.out.println("ShareUtils.onStart()");
+		Log.d("onStart()", "ShareUtils.onStart()");
 	}
 
 

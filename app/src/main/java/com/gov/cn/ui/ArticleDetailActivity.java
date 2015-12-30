@@ -1,4 +1,4 @@
-package com.gov.cn;
+package com.gov.cn.ui;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -6,6 +6,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import com.gov.cn.R;
+import com.umeng.analytics.MobclickAgent;
 
 public class ArticleDetailActivity extends AppCompatActivity {
 
@@ -24,6 +27,20 @@ public class ArticleDetailActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart(getClass().getSimpleName());
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd(getClass().getSimpleName());
+        MobclickAgent.onPause(this);
     }
 
 }

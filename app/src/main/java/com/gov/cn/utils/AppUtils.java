@@ -1,4 +1,4 @@
-package com.gov.cn;
+package com.gov.cn.utils;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
