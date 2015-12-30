@@ -14,8 +14,8 @@ import com.umeng.analytics.MobclickAgentJSInterface;
 public class WebActivity extends BaseFragmentActivity {
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_umeng_analytics_webview);
 
         WebView webview = (WebView) findViewById(R.id.webview);
