@@ -1,1 +1,1 @@
-include ':app', ':libumeng', ':libumengpsh'
+include ':app', ':libumeng', ':libumengpsh', ':libumenganalytics'

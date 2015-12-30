@@ -56,6 +56,7 @@ public class GovApplication extends Application {
          * */
         UmengNotificationClickHandler notificationClickHandler = new UmengNotificationClickHandler() {
             private boolean dealDetail(Context context, UMessage msg){
+                //处理推送发来的测试数据
                 if(msg!=null&&msg.extra!=null){
                     Log.d("push", "msg.extra:" + msg.extra);
                     final String ColumnId = msg.extra.get("ColumnId");
@@ -72,14 +73,18 @@ public class GovApplication extends Application {
                                 startActivity(intent);
                             }
                         };
+                        task.run();
                     }
+                    //根据需求处理代码逻辑
                 }else{
                     Intent intent = new Intent(getApplicationContext(), ArticleDetailActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
+
                 return false;
             }
+
 
             @Override
             public void dealWithCustomAction(Context arg0, UMessage msg) {
@@ -121,33 +126,33 @@ public class GovApplication extends Application {
              * */
             @Override
             public void dealWithCustomMessage(final Context context, final UMessage msg) {
-                new Handler().post(new Runnable() {
+                new Handler(getMainLooper()).post(new Runnable() {
 
                     @Override
                     public void run() {
                         // TODO Auto-generated method stub
-                        // 对自定义消息的处理方式，点击或者忽略
-                        boolean isClickOrDismissed = true;
-                        if (isClickOrDismissed) {
-                            //自定义消息的点击统计
-                            UTrack.getInstance(getApplicationContext()).trackMsgClick(msg);
-                        } else {
-                            //自定义消息的忽略统计
-                            UTrack.getInstance(getApplicationContext()).trackMsgDismissed(msg);
-                        }
-                        Toast.makeText(context, msg.custom, Toast.LENGTH_LONG).show();
+                        UTrack.getInstance(getApplicationContext())
+                                .trackMsgClick(msg);
+                        // Toast.makeText(context, msg.custom,
+                        // Toast.LENGTH_LONG).show();
+                        Log.d("content", msg.extra.toString());
+                        //
+                        //path为null，证明意图是打开应用，不是进详情
+//						if(TextUtils.isEmpty(save.path)){
                     }
                 });
             }
 
             /**
-             * 参考集成文档的1.6.4
-             * http://dev.umeng.com/push/android/integration#1_6_4
+             * 通知
+             * (参考集成文档的1.6.4
+             * http://dev.umeng.com/push/android/integration#1_6_4)
              * */
             @Override
             public Notification getNotification(Context context, UMessage msg) {
                 switch (msg.builder_id) {
-                    case 1:
+                    //TODO  自定义通知样式
+                   /* case 1:
                         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
                         RemoteViews myNotificationView = new RemoteViews(context.getPackageName(), R.layout.notification_view);
                         myNotificationView.setTextViewText(R.id.notification_title, msg.title);
@@ -162,7 +167,7 @@ public class GovApplication extends Application {
                         Notification mNotification = builder.build();
                         //由于Android v4包的bug，在2.3及以下系统，Builder创建出来的Notification，并没有设置RemoteView，故需要添加此代码
                         mNotification.contentView = myNotificationView;
-                        return mNotification;
+                        return mNotification;*/
                     default:
                         //默认为0，若填写的builder_id并不存在，也使用默认。
                         return super.getNotification(context, msg);

@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/LibsUmeng.iml" filepath="$PROJECT_DIR$/LibsUmeng.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/libumeng/libumeng.iml" filepath="$PROJECT_DIR$/libumeng/libumeng.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libumenganalytics/libumenganalytics.iml" filepath="$PROJECT_DIR$/libumenganalytics/libumenganalytics.iml" />
       <module fileurl="file://$PROJECT_DIR$/libumengpsh/libumengpsh.iml" filepath="$PROJECT_DIR$/libumengpsh/libumengpsh.iml" />
     </modules>
   </component>
